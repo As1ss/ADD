@@ -29,15 +29,21 @@ public class EjemploListas2 {
 			direccion = entradaUsuario;
 		}
 		File dirActual = new File(direccion);
+		if (dirActual.exists()) {
+			for (File list : dirActual.listFiles()) {
 
-		for (File list : dirActual.listFiles()) {
-
-			if (list.isFile()) {
-				System.out.println(fichero + list);
-			} else {
-				System.out.println(directorio + list);
+				if (list.isFile()) {
+					System.out.println(fichero + list);
+				} else {
+					System.out.println(directorio + list);
+				}
 			}
 		}
+		else {
+			System.out.println("El directorio no existe");
+		}
+
+		
 	}
 
 	private static void menuPrincipal() {
@@ -61,7 +67,6 @@ public class EjemploListas2 {
 				case 2:
 					System.out.println("Introduce la dirección del directorio:");
 					direccion = sc.nextLine();
-					sc.close();
 					obtenerLista(direccion);
 					break;
 				case 3:
@@ -74,7 +79,7 @@ public class EjemploListas2 {
 			}
 
 			catch (Exception e) {
-				System.out.println("Debes introducir un dígito");
+				
 				menuPrincipal();
 			}
 		} while (opcion != 3);
