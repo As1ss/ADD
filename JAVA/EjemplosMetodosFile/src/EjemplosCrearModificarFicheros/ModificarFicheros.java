@@ -30,6 +30,7 @@ public class ModificarFicheros {
 			fichero2.renameTo(ficheroRenombrado);
 		}
 		
+		
 		for (File lista: directorio.listFiles()) {
 			System.out.println(lista);
 		}
