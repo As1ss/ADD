@@ -1,6 +1,4 @@
-Burgos
-Leon
-Palencia
+Burgos Leon Palencia
 Salamanca
 Segovia
 Soria

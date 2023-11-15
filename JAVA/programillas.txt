@@ -1,0 +1,1 @@
+Un programilla java que escriba del 1 al 100 en un fichero llamado "FichBytes.dat" y que los visualice por consola.

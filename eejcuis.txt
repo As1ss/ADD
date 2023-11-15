@@ -1,0 +1,4 @@
+Esribir un programa en el fichero fichdata.dat escriba los nombres "Ana,Luis,Alicia,Pedro,Manuel,Andrés,Julio,Antonio,María,Jesús"
+Edades 14,15,13,15,16,12,16,14,13,15
+
+Programa java que muestre por consola el fichero anterior
