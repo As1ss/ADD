@@ -2,3 +2,19 @@ Esribir un programa en el fichero fichdata.dat escriba los nombres "Ana,Luis,Ali
 Edades 14,15,13,15,16,12,16,14,13,15
 
 Programa java que muestre por consola el fichero anterior
+
+
+
+PROGRAMA PARA INSERTAR LOS DATOS DE LOS EMPLEADOS DE UNA EMRPESA EN UN FICHERO ALEATORIO LLAMADO "AleatorioEmple.dat" donde los datos son 
+
+apellidos{"FERNANDEZ GIL LOPEZ RAMOS SEVILLA CASTILLA REY")==>10 caracteres(20 bytes)
+
+departamento {10 , 20 ,10 , 10, 30, 30, 20} ==>int(4bytes)
+
+salario float{ 1000.45, 2400.60, 3000.00, 1500.56, 2200.00, 1435.87, 2000.00} ==> double(8bytes)
+
+además para cada empleado se insertarña un ID > 0 (4bytes) siendo la longitud del registro de 36 bytes
+
+
+
+PROGRAMAR QUE LEA UN REGISTRO Y LO MUESTRE POR PANTALLA

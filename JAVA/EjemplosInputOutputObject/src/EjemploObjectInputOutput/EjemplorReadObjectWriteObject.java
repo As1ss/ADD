@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.DecimalFormat;
 
 public class EjemplorReadObjectWriteObject {
 
@@ -26,8 +27,12 @@ public class EjemplorReadObjectWriteObject {
 			File fich = new File("FichPersona.dat");
 			fich.createNewFile();
 		
-			ObjectOutputStream oS = new ObjectOutputStream(new FileOutputStream(fich));
-		
+			ObjectOutputStream oS = new MiObjectOutputStream(new FileOutputStream(fich,true));
+			
+			
+			DecimalFormat formato = new DecimalFormat("#.##");
+			float num =12.5334f;
+			System.out.println(formato.format(num));
 
 			try {
 				for (Persona p : personas) {
@@ -48,11 +53,7 @@ public class EjemplorReadObjectWriteObject {
 					System.out.println("Fin del documento");
 				}
 				
-				
-				
-				
-				
-			
+
 				oI.close();
 			} catch (Exception e) {
 				e.printStackTrace();
