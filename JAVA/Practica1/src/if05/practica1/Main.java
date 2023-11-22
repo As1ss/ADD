@@ -30,7 +30,9 @@ public class Main {
 			System.out.println("3) Modificar alumno.");
 			System.out.println("4) Consultar aluno.");
 			System.out.println("5) Salir.");
-			opcion=sc.nextLine();
+			opcion=sc.next();
+			sc.nextLine();
+			
 		
 			
 			
@@ -142,19 +144,21 @@ public class Main {
 		System.out.println("Alta de usuario.");
 
 		System.out.println("Introduce el nombre");
-		nombre = sc.nextLine();
+		nombre = sc.next();
+		sc.nextLine();
 		bufferNombre=new StringBuffer(nombre);
 		bufferNombre.setLength(20);
-		nombre="";
+
 		
 		System.out.println("Introduce los apellidos");
 		apellidos = sc.nextLine();
 		bufferApellidos=new StringBuffer(apellidos);
 		bufferApellidos.setLength(30);
-		apellidos="";
+	
 		
 		System.out.println("Introduce el DNI");
-		dni = sc.nextLine();
+		dni = sc.next();
+		sc.nextLine();
 		if (!comprobarDNI(dni)) {
 			System.out.println("Dni no válido");
 			menuPrincipal();
@@ -163,13 +167,14 @@ public class Main {
 		
 		bufferDni= new StringBuffer(dni);
 		bufferDni.setLength(9);
-		dni="";
+
 		
 		System.out.println("Introduce el ciclo");
-		ciclo = sc.nextLine();
+		ciclo = sc.next();
+		sc.nextLine();
 		bufferCiclo = new StringBuffer(ciclo);
 		bufferCiclo.setLength(5);
-		ciclo="";
+
 		
 		System.out.println("Introduce el curso");
 		curso = sc.nextInt();
@@ -183,8 +188,6 @@ public class Main {
 		
 		
 
-		
-		
 		
 		
 		
