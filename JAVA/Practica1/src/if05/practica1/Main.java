@@ -58,7 +58,7 @@ public class Main {
 				break;
 			case "4":
 				System.out.println("Has escogido consultar alumnos.");
-				consultar();
+				consultarMenu();
 				break;
 			case "5":
 				System.out.println("Has escogido salir.");
@@ -83,19 +83,21 @@ public class Main {
 			raf.seek(posicion);
 
 			for (int i = 0; i < dniChar.length; i++) {
-				aux = raf.readChar();
-				dniChar[i] = aux;
+				aux = raf.readChar();//Leemos y almacenamos en esta variable los caracteres leidso
+				dniChar[i] = aux; // Los almacenamos en un array de caracteres
 			}
-			dni = new String(dniChar);
+			dni = new String(dniChar);//Creamos un string con el array de caracteres
 
 			if (dni.equals(dniConsulta)) {
-				modificarAlumno(posicion);
+				modificarAlumno(posicion);//Le pasamos la posición del registro con el que ha 
+				//coincidido el dni.
 				break;
 			}
 
-			posicion += Constantes.TAMAÑOREGISTRO;
+			posicion += Constantes.TAMAÑOREGISTRO;//Sumamos la posicion del puntero para leer
+			//el siguiente registro
 
-			if (raf.getFilePointer() == fich.length()) {
+			if (raf.getFilePointer() == fich.length()) {//SI el puntero llega al final del fichero
 
 				System.out.println("El dni introducido no coincide con ningún alumno.");
 				break;
@@ -112,7 +114,8 @@ public class Main {
 		String opcion;
 		do {
 
-			raf.seek(posicionOriginal);
+			raf.seek(posicionOriginal); //Establecemos una posicion original que le hemos
+			//pasado por parametro para poder volver al principio del registro
 			System.out.println("Introduce el cambio que quieres realizar.");
 			System.out.println("1) DNI");
 			System.out.println("2) Apellidos");
@@ -142,7 +145,8 @@ public class Main {
 				}
 				break;
 			case "2":
-				posicion += Constantes.TAMAÑODNI;
+				posicion += Constantes.TAMAÑODNI;//Sumamos el tamaño del dni para avanzar el
+				//puntero hasta la parte de modificar el apellido
 				raf.seek(posicion);
 				System.out.println("Introduce los nuevos apellidos");
 				String apellidos = sc.nextLine();
@@ -157,7 +161,7 @@ public class Main {
 				} else {
 					System.out.println("El o los apellidos no son válidos.");
 				}
-				posicion = posicionOriginal;
+				posicion = posicionOriginal;//Reiniciamos la posición del puntero
 				break;
 			case "3":
 				posicion += Constantes.TAMAÑODNI + Constantes.TAMAÑOAPELLIDOS;
@@ -231,15 +235,16 @@ public class Main {
 		StringBuffer buffer;
 		System.out.println("\n✪    ELIMINAR ALUMNO   ✪");
 		System.out.println("Introduce el dni del alumno a eliminar.");
-		dniConsulta = sc.nextLine();
+		dniConsulta = sc.nextLine();//Leemos en una variable temporal para comparar el dni leido
+		//introducida por el usuari
 		while (true) {
-			raf.seek(posicion);
+			raf.seek(posicion);//Establecemos la posicion desde el principio que luego aumentaremos
 
 			for (int i = 0; i < dniChar.length; i++) {
 				aux = raf.readChar();
 				dniChar[i] = aux;
 			}
-			dni = new String(dniChar);
+			dni = new String(dniChar);//Leemos y guardamos el dni del registro
 
 			for (int i = 0; i < apellidosChar.length; i++) {
 				aux = raf.readChar();
@@ -260,27 +265,28 @@ public class Main {
 			ciclo = new String(cicloChar);
 			curso = raf.readInt();
 
-			if (dniConsulta.equals(dni)) {
+			if (dniConsulta.equals(dni)) {//Comparamos valores de los dni
 
 				System.out.println("Apellidos: " + apellidos.trim());
 				System.out.println("Nombre: " + nombre.trim());
 				System.out.println("DNI: " + dni.trim());
 				System.out.println("Ciclo: " + ciclo.trim());
 				System.out.println("Curso: " + curso);
-				System.out.println("Estas seguro de eliminar este alumno?");
+				System.out.println("Estas seguro de eliminar este alumno?");//Mostramos el usuario antes de borrarlo
 
-				if (confirmarCambios()) {
+				if (confirmarCambios()) {//Pedimos confirmación de eliminacion
 					raf.seek(posicion);
-					buffer = new StringBuffer("0");
-					buffer.setLength(9);
-					raf.writeChars(buffer.toString());
-					System.out.println("Alumno eliminado.");
+					buffer = new StringBuffer("0");//Asignamos este valor al campo dni
+					buffer.setLength(Constantes.NUMCHARDNI);//Establecemos el tamaño del buffer
+					raf.writeChars(buffer.toString());//Sobreescribimos el dni con el valor 0
+					System.out.println("Alumno eliminado.");//Mostramos un mensaje para hacer saber que se ha
+					//realizado la acción.
 				}
 
-				break;
+				break;//Salimos del bucle
 			}
 
-			posicion += Constantes.TAMAÑOREGISTRO;
+			posicion += Constantes.TAMAÑOREGISTRO;//Sumamos posicion del puntero
 
 			if (raf.getFilePointer() == fich.length()) {
 
@@ -292,7 +298,7 @@ public class Main {
 
 	}
 
-	private static void consultar() throws IOException {
+	private static void consultarMenu() throws IOException {
 		String opcion;
 		do {
 			System.out.println("✪    CONSULTAR ALUMNOS    ✪");
@@ -456,7 +462,7 @@ public class Main {
 		System.out.println("Introduce el nombre");
 		nombre = sc.nextLine();
 
-		if (!comprobarNomApellCiclo(nombre)) {
+		if (!comprobarNomApellCiclo(nombre)) {//Comprobamso que sea el nombre válido (no dígitos)
 			System.err.println("Nombre no válido. Solo se aceptan caracteres alfabeticos.");
 			System.out.println("Volviendo al menú principal.");
 			System.out.println();
@@ -469,7 +475,7 @@ public class Main {
 		System.out.println("Introduce los apellidos");
 		apellidos = sc.nextLine();
 
-		if (!comprobarNomApellCiclo(apellidos)) {
+		if (!comprobarNomApellCiclo(apellidos)) {//Comprobamso que sea el apellidos válido (no dígitos)
 			System.err.println("Apellido no válido. Solo se aceptan caracteres alfabeticos.");
 			System.out.println("Volviendo al menú principal.");
 			System.out.println();
@@ -481,7 +487,7 @@ public class Main {
 		System.out.println("Introduce el DNI");
 		dni = sc.nextLine();
 
-		if (!comprobarDNI(dni)) {
+		if (!comprobarDNI(dni)) { //Comprobamso que sea el dni válido (no dígitos)
 			System.err.println("Dni no válido");
 			System.out.println("Volviendo al menú principal.");
 			System.out.println();
@@ -494,7 +500,7 @@ public class Main {
 
 		System.out.println("Introduce el ciclo");
 		ciclo = sc.nextLine();
-		if (!comprobarNomApellCiclo(ciclo)) {
+		if (!comprobarNomApellCiclo(ciclo)) { //Comprobamso que sea el ciclo válido (no dígitos)
 			System.err.println("Ciclo no válido. Solo se aceptan caracteres alfabeticos.");
 			System.out.println("Volviendo al menú principal.");
 			System.out.println();
@@ -509,7 +515,7 @@ public class Main {
 		curso = sc.nextInt();
 		sc.nextLine();
 
-		if (curso!=1 && curso!=2) {
+		if (curso!=1 && curso!=2) { //Comprobamso que sea el curso sea válido(no dígito diferente a 1 y2
 			System.err.println("Curso introducido no válido");
 			System.out.println("Volviendo al menu principal.");
 			System.out.println();
@@ -523,7 +529,7 @@ public class Main {
 		System.out.println("Ciclo: " + ciclo);
 		System.out.println("Curso: " + curso);
 		System.out.println("Estas seguro de crear este alumno?");
-		if (confirmarCambios()) {
+		if (confirmarCambios()) {//Pedimos confirmación para crear el alumno
 			raf.writeChars(bufferDni.toString());
 			raf.writeChars(bufferApellidos.toString());
 			raf.writeChars(bufferNombre.toString());
@@ -542,14 +548,14 @@ public class Main {
 	}
 
 	private static boolean comprobarNomApellCiclo(String valor) {
-		String patronValido = "^[^\\d]*$";
+		String patronValido = "^[^\\d]*$"; //No admite dígitos
 		Pattern pattern = Pattern.compile(patronValido);
 		Matcher matcher = pattern.matcher(valor);
 		return matcher.matches();
 	}
 
 	private static boolean comprobarDNI(String dni) {
-		String patronValido = "\\d{8}[A-HJ-NP-TV-Z]";
+		String patronValido = "\\d{8}[A-HJ-NP-TV-Z]"; //Admite 8 digitos y una letra mayúscula
 		Pattern pattern = Pattern.compile(patronValido);
 		Matcher matcher = pattern.matcher(dni);
 
