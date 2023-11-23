@@ -41,6 +41,7 @@ public class Main {
 				break;
 			case "2":
 				System.out.println("Has escogido baja");
+				consultarTodosAlumnos();
 				baja();
 				break;
 			case "3":
@@ -237,16 +238,8 @@ public class Main {
 				dniChar[i] = aux;
 			}
 			dni = new String(dniChar);
-			
-			if (dniConsulta.equals(dni)) {
-				raf.seek(posicion);
-				buffer = new StringBuffer("0");
-				buffer.setLength(9);
-				raf.writeChars(buffer.toString());
-				System.out.println("Alumno eliminado.");
-				break;
-			}
 
+			
 			for (int i = 0; i < apellidosChar.length; i++) {
 				aux = raf.readChar();
 				apellidosChar[i] = aux;
@@ -265,8 +258,26 @@ public class Main {
 			}
 			ciclo = new String(cicloChar);
 			curso = raf.readInt();
-
 			
+			if (dniConsulta.equals(dni)) {
+				
+				System.out.println("Apellidos: "+apellidos);
+				System.out.println("Nombre: "+nombre);
+				System.out.println("DNI: "+dni);
+				System.out.println("Ciclo: "+ciclo);
+				System.out.println("Curso: "+curso);
+				System.out.println("Estas seguro de eliminar este alumno?");
+			
+				if (confirmarCambios()) {
+					raf.seek(posicion);
+					buffer = new StringBuffer("0");
+					buffer.setLength(9);
+					raf.writeChars(buffer.toString());
+					System.out.println("Alumno eliminado.");
+				}
+				
+				break;
+			}
 
 			posicion += Constantes.TAMAÑOREGISTRO;
 
@@ -434,20 +445,36 @@ public class Main {
 
 		System.out.println("Introduce el nombre");
 		nombre = sc.nextLine();
-	
+		
+		if (!comprobarNomApellCiclo(nombre)) {
+			System.out.println("Nombre no válido. Solo se aceptan caracteres alfabeticos.");
+			System.out.println("Volviendo al menú principal.");
+			System.out.println();
+			menuPrincipal();
+		}
+
 		bufferNombre = new StringBuffer(nombre);
 		bufferNombre.setLength(Constantes.NUMCHARNOMBRE);
 
 		System.out.println("Introduce los apellidos");
 		apellidos = sc.nextLine();
+		
+		if (!comprobarNomApellCiclo(apellidos)) {
+			System.out.println("Apellido no válido. Solo se aceptan caracteres alfabeticos.");
+			System.out.println("Volviendo al menú principal.");
+			System.out.println();
+			menuPrincipal();
+		}
 		bufferApellidos = new StringBuffer(apellidos);
 		bufferApellidos.setLength(Constantes.NUMCHARAPELLIDOS);
 
 		System.out.println("Introduce el DNI");
 		dni = sc.nextLine();
-		
+
 		if (!comprobarDNI(dni)) {
 			System.out.println("Dni no válido");
+			System.out.println("Volviendo al menú principal.");
+			System.out.println();
 			menuPrincipal();
 
 		}
@@ -457,20 +484,45 @@ public class Main {
 
 		System.out.println("Introduce el ciclo");
 		ciclo = sc.nextLine();
-	
+		if (!comprobarNomApellCiclo(ciclo)) {
+			System.out.println("Ciclo no válido. Solo se aceptan caracteres alfabeticos.");
+			System.out.println("Volviendo al menú principal.");
+			System.out.println();
+			menuPrincipal();
+		}
+
 		bufferCiclo = new StringBuffer(ciclo);
 		bufferCiclo.setLength(Constantes.NUMCHARCICLO);
 
 		System.out.println("Introduce el curso");
+		
 		curso = sc.nextInt();
 		sc.nextLine();
 
-		raf.writeChars(bufferDni.toString());
-		raf.writeChars(bufferApellidos.toString());
-		raf.writeChars(bufferNombre.toString());
-		raf.writeChars(bufferCiclo.toString());
-		raf.writeInt(curso);
+		System.out.println("Apellidos: "+apellidos);
+		System.out.println("Nombre: "+nombre);
+		System.out.println("DNI: "+dni);
+		System.out.println("Ciclo: "+ciclo);
+		System.out.println("Curso: "+curso);
+		System.out.println("Estas seguro de crear este alumno?");
+		if (confirmarCambios()) {
+			raf.writeChars(bufferDni.toString());
+			raf.writeChars(bufferApellidos.toString());
+			raf.writeChars(bufferNombre.toString());
+			raf.writeChars(bufferCiclo.toString());
+			raf.writeInt(curso);
+			System.out.println("Alumno creado.");
+			System.out.println();
 
+		}
+		else {
+			System.out.println("Cancelado creación del alumno.");
+			System.out.println("Volviendo al menú principal.");
+			System.out.println();
+			menuPrincipal();
+		}
+		
+	
 	}
 
 	private static boolean comprobarNomApellCiclo(String valor) {
@@ -480,11 +532,23 @@ public class Main {
 		return matcher.matches();
 	}
 
-	static boolean comprobarDNI(String dni) {
+	private static boolean comprobarDNI(String dni) {
 		String patronValido = "\\d{8}[A-HJ-NP-TV-Z]";
 		Pattern pattern = Pattern.compile(patronValido);
 		Matcher matcher = pattern.matcher(dni);
 
 		return matcher.matches();
+	}
+
+	private static boolean confirmarCambios() {
+		String opcion;
+		System.out.println("1) Si.");
+		System.out.println("2) No.");
+		System.out.println();
+		opcion = sc.nextLine();
+		if (opcion.equals("1")) {
+			return true;
+		}
+		return false;
 	}
 }
