@@ -1,5 +1,6 @@
 package if05.practica1;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -8,26 +9,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+	// Declaramos las variables estaticas que vamos a utilizar por toda la clase
 	static File fich;
 	static RandomAccessFile raf;
 	static Scanner sc;
 
 	public static void main(String[] args) throws IOException {
-		fich = new File("Alumnos.dat");
-		raf = new RandomAccessFile(fich, "rw");
-		sc = new Scanner(System.in);
+		// Inicializamos las variables
+		fich = new File("Alumnos.dat");// Fichero con el que vamos a trabajar
+		raf = new RandomAccessFile(fich, "rw"); // Clase con el que vamos a leer y escribir
+		sc = new Scanner(System.in); // Scanner para recoger las entradas de los usuarios.
 
+		// Iniciamos el menu principal con todas las operaciones disponibles.
 		menuPrincipal();
 
+		// Cerramos el fichero.
 		raf.close();
 	}
 
 	private static void menuPrincipal() throws IOException {
 		String opcion;
 		do {
-			System.out.println("Gestión de alumnado.");
-			System.out.println("1) Realizar alta de alumno.");
-			System.out.println("2) Realizar baja de alumno.");
+			System.out.println("✪    GESTIÓN DEL ALUMNADO    ✪");
+			System.out.println("1) Realizar creación de alumno.");
+			System.out.println("2) Realizar eliminación de alumno.");
 			System.out.println("3) Modificar alumno.");
 			System.out.println("4) Consultar alumnos.");
 			System.out.println("5) Salir.");
@@ -36,21 +41,23 @@ public class Main {
 
 			switch (opcion) {
 			case "1":
-				System.out.println("Has escogido alta");
+				System.out.println("Has escogido creación de alumno.");
 				alta();
 				break;
 			case "2":
-				System.out.println("Has escogido baja");
-				consultarTodosAlumnos();
+				System.out.println("Has escogido eliminación de alumno");
+				consultarTodosAlumnos();// Mostramos la lista de todos los alumnos para poder identificar
+				// al alumno que queremos dar de baja.
 				baja();
 				break;
 			case "3":
-				System.out.println("Has escogido modificacion");
-				consultarTodosAlumnos();
+				System.out.println("Has escogido modificacion de alumno.");
+				consultarTodosAlumnos();// Mostramos la lista de todos los alumnos para poder identificar
+				// al alumno que queremos modificar.
 				modificar();
 				break;
 			case "4":
-				System.out.println("Has escogido Consulta");
+				System.out.println("Has escogido consultar alumnos.");
 				consultar();
 				break;
 			case "5":
@@ -64,16 +71,12 @@ public class Main {
 	}
 
 	private static void modificar() throws IOException {
-		char[] nombreChar = new char[Constantes.NUMCHARNOMBRE];
-		char[] apellidosChar = new char[Constantes.NUMCHARAPELLIDOS];
 		char[] dniChar = new char[Constantes.NUMCHARDNI];
-		char[] cicloChar = new char[Constantes.NUMCHARCICLO];
 		char aux;
-		String dni, apellidos, nombre, ciclo;
-		int curso;
+		String dni;
 		int posicion = 0;
 		String dniConsulta;
-		StringBuffer buffer;
+		System.out.println("✪    MODIFICAR ALUMNO    ✪");
 		System.out.println("Introduce el dni del alumno a modificar.");
 		dniConsulta = sc.nextLine();
 		while (true) {
@@ -84,25 +87,6 @@ public class Main {
 				dniChar[i] = aux;
 			}
 			dni = new String(dniChar);
-
-			for (int i = 0; i < apellidosChar.length; i++) {
-				aux = raf.readChar();
-				apellidosChar[i] = aux;
-			}
-			apellidos = new String(apellidosChar);
-
-			for (int i = 0; i < nombreChar.length; i++) {
-				aux = raf.readChar();
-				nombreChar[i] = aux;
-			}
-			nombre = new String(nombreChar);
-
-			for (int i = 0; i < cicloChar.length; i++) {
-				aux = raf.readChar();
-				cicloChar[i] = aux;
-			}
-			ciclo = new String(cicloChar);
-			curso = raf.readInt();
 
 			if (dni.equals(dniConsulta)) {
 				modificarAlumno(posicion);
@@ -218,10 +202,9 @@ public class Main {
 				System.out.println("Introduce el nuevo curso.");
 				curso = sc.nextInt();
 				sc.nextLine();
-		
+
 				System.out.println("¿Estás seguro de realizar el cambio de curso?");
 				if (confirmarCambios()) {
-					
 
 					raf.writeInt(curso);
 					System.out.println("Alumno actualizado.");
@@ -246,7 +229,8 @@ public class Main {
 		int posicion = 0;
 		String dniConsulta;
 		StringBuffer buffer;
-		System.out.println("Introduce el dni del alumno a consultar.");
+		System.out.println("\n✪    ELIMINAR ALUMNO   ✪");
+		System.out.println("Introduce el dni del alumno a eliminar.");
 		dniConsulta = sc.nextLine();
 		while (true) {
 			raf.seek(posicion);
@@ -278,10 +262,10 @@ public class Main {
 
 			if (dniConsulta.equals(dni)) {
 
-				System.out.println("Apellidos: " + apellidos);
-				System.out.println("Nombre: " + nombre);
-				System.out.println("DNI: " + dni);
-				System.out.println("Ciclo: " + ciclo);
+				System.out.println("Apellidos: " + apellidos.trim());
+				System.out.println("Nombre: " + nombre.trim());
+				System.out.println("DNI: " + dni.trim());
+				System.out.println("Ciclo: " + ciclo.trim());
 				System.out.println("Curso: " + curso);
 				System.out.println("Estas seguro de eliminar este alumno?");
 
@@ -311,6 +295,7 @@ public class Main {
 	private static void consultar() throws IOException {
 		String opcion;
 		do {
+			System.out.println("✪    CONSULTAR ALUMNOS    ✪");
 			System.out.println("Introduce una opción de consulta:");
 			System.out.println("1) Mostrar todos los alumnos.");
 			System.out.println("2) Mostrar un alumno en concreto.");
@@ -336,7 +321,7 @@ public class Main {
 
 	}
 
-	private static void consultarAlumno() throws IOException {
+	private static void consultarAlumno(){
 		char[] nombreChar = new char[Constantes.NUMCHARNOMBRE];
 		char[] apellidosChar = new char[Constantes.NUMCHARAPELLIDOS];
 		char[] dniChar = new char[Constantes.NUMCHARDNI];
@@ -348,37 +333,35 @@ public class Main {
 		String dniConsulta;
 		System.out.println("Introduce el dni del alumno a consultar.");
 		dniConsulta = sc.nextLine();
-		while (true) {
-			raf.seek(posicion);
+		try {
+			while (true) {
+				raf.seek(posicion);
 
-			for (int i = 0; i < dniChar.length; i++) {
-				aux = raf.readChar();
-				dniChar[i] = aux;
-			}
-			dni = new String(dniChar);
+				for (int i = 0; i < dniChar.length; i++) {
+					aux = raf.readChar();
+					dniChar[i] = aux;
+				}
+				dni = new String(dniChar);
 
-			for (int i = 0; i < apellidosChar.length; i++) {
-				aux = raf.readChar();
-				apellidosChar[i] = aux;
-			}
-			apellidos = new String(apellidosChar);
+				for (int i = 0; i < apellidosChar.length; i++) {
+					aux = raf.readChar();
+					apellidosChar[i] = aux;
+				}
+				apellidos = new String(apellidosChar);
 
-			for (int i = 0; i < nombreChar.length; i++) {
-				aux = raf.readChar();
-				nombreChar[i] = aux;
-			}
-			nombre = new String(nombreChar);
+				for (int i = 0; i < nombreChar.length; i++) {
+					aux = raf.readChar();
+					nombreChar[i] = aux;
+				}
+				nombre = new String(nombreChar);
 
-			for (int i = 0; i < cicloChar.length; i++) {
-				aux = raf.readChar();
-				cicloChar[i] = aux;
-			}
-			ciclo = new String(cicloChar);
-			curso = raf.readInt();
+				for (int i = 0; i < cicloChar.length; i++) {
+					aux = raf.readChar();
+					cicloChar[i] = aux;
+				}
+				ciclo = new String(cicloChar);
+				curso = raf.readInt();
 
-			posicion += Constantes.TAMAÑOREGISTRO;
-
-			if (raf.getFilePointer() == fich.length()) {
 				if (dni.equals(dniConsulta)) {
 
 					System.out.println("DNI: " + dni.trim());
@@ -388,13 +371,23 @@ public class Main {
 					System.out.println("Curso: " + curso);
 					System.out.println();
 					break;
-				} else {
-					System.out.println("El dni introducido no coincide con ningún alumno registrado.\n");
-					break;
-				}
-			}
 
+				}
+
+				posicion += Constantes.TAMAÑOREGISTRO;
+
+				if (raf.getFilePointer() == fich.length()) {
+					System.err.println("Alumno no encontrado o el dni no es válido.");
+				}
+
+			}
+		} catch (EOFException e) {
+			System.out.println();
+
+		} catch (IOException e) {
+			System.err.println("Ha ocurrido algún tipo de error.");
 		}
+
 	}
 
 	private static void consultarTodosAlumnos() throws IOException {
@@ -458,13 +451,13 @@ public class Main {
 		StringBuffer bufferNombre, bufferApellidos, bufferDni, bufferCiclo;
 		String nombre, apellidos, dni, ciclo;
 		int curso;
-		System.out.println("Alta de usuario.");
+		System.out.println("✪    ALTA DE USUARIO    ✪");
 
 		System.out.println("Introduce el nombre");
 		nombre = sc.nextLine();
 
 		if (!comprobarNomApellCiclo(nombre)) {
-			System.out.println("Nombre no válido. Solo se aceptan caracteres alfabeticos.");
+			System.err.println("Nombre no válido. Solo se aceptan caracteres alfabeticos.");
 			System.out.println("Volviendo al menú principal.");
 			System.out.println();
 			menuPrincipal();
@@ -477,7 +470,7 @@ public class Main {
 		apellidos = sc.nextLine();
 
 		if (!comprobarNomApellCiclo(apellidos)) {
-			System.out.println("Apellido no válido. Solo se aceptan caracteres alfabeticos.");
+			System.err.println("Apellido no válido. Solo se aceptan caracteres alfabeticos.");
 			System.out.println("Volviendo al menú principal.");
 			System.out.println();
 			menuPrincipal();
@@ -489,7 +482,7 @@ public class Main {
 		dni = sc.nextLine();
 
 		if (!comprobarDNI(dni)) {
-			System.out.println("Dni no válido");
+			System.err.println("Dni no válido");
 			System.out.println("Volviendo al menú principal.");
 			System.out.println();
 			menuPrincipal();
@@ -502,7 +495,7 @@ public class Main {
 		System.out.println("Introduce el ciclo");
 		ciclo = sc.nextLine();
 		if (!comprobarNomApellCiclo(ciclo)) {
-			System.out.println("Ciclo no válido. Solo se aceptan caracteres alfabeticos.");
+			System.err.println("Ciclo no válido. Solo se aceptan caracteres alfabeticos.");
 			System.out.println("Volviendo al menú principal.");
 			System.out.println();
 			menuPrincipal();
@@ -515,6 +508,14 @@ public class Main {
 
 		curso = sc.nextInt();
 		sc.nextLine();
+
+		if (curso!=1 && curso!=2) {
+			System.err.println("Curso introducido no válido");
+			System.out.println("Volviendo al menu principal.");
+			System.out.println();
+			menuPrincipal();
+		}
+		
 
 		System.out.println("Apellidos: " + apellidos);
 		System.out.println("Nombre: " + nombre);
@@ -541,7 +542,7 @@ public class Main {
 	}
 
 	private static boolean comprobarNomApellCiclo(String valor) {
-		String patronValido = "^[a-zA-Z\\s]+$";
+		String patronValido = "^[^\\d]*$";
 		Pattern pattern = Pattern.compile(patronValido);
 		Matcher matcher = pattern.matcher(valor);
 		return matcher.matches();
