@@ -140,13 +140,17 @@ public class Main {
 			opcion = sc.nextLine();
 			switch (opcion) {
 			case "1":
+
 				System.out.println("Introduce un nuevo dni válido");
 				String dni = sc.nextLine();
 				if (comprobarDNI(dni)) {
-					bufferDni = new StringBuffer(dni);
-					bufferDni.setLength(Constantes.NUMCHARDNI);
-					raf.writeChars(bufferDni.toString());
-					System.out.println("Alumno actualizado.");
+					System.out.println("¿Estás seguro de realizar el cambio de dni?");
+					if (confirmarCambios()) {
+						bufferDni = new StringBuffer(dni);
+						bufferDni.setLength(Constantes.NUMCHARDNI);
+						raf.writeChars(bufferDni.toString());
+						System.out.println("Alumno actualizado.");
+					}
 
 				} else {
 					System.out.println("El dni introducido no es válido.");
@@ -159,10 +163,13 @@ public class Main {
 				System.out.println("Introduce los nuevos apellidos");
 				String apellidos = sc.nextLine();
 				if (comprobarNomApellCiclo(apellidos)) {
-					bufferApellidos = new StringBuffer(apellidos);
-					bufferApellidos.setLength(Constantes.NUMCHARAPELLIDOS);
-					raf.writeChars(bufferApellidos.toString());
-					System.out.println("Alumno actualizado.");
+					System.out.println("¿Estás seguro de realizar el cambio de los apellidos?");
+					if (confirmarCambios()) {
+						bufferApellidos = new StringBuffer(apellidos);
+						bufferApellidos.setLength(Constantes.NUMCHARAPELLIDOS);
+						raf.writeChars(bufferApellidos.toString());
+						System.out.println("Alumno actualizado.");
+					}
 				} else {
 					System.out.println("El o los apellidos no son válidos.");
 				}
@@ -174,10 +181,13 @@ public class Main {
 				System.out.println("Introduce el nuevo nombre.");
 				String nombre = sc.nextLine();
 				if (comprobarNomApellCiclo(nombre)) {
-					bufferNombre = new StringBuffer(nombre);
-					bufferNombre.setLength(Constantes.NUMCHARNOMBRE);
-					raf.writeChars(bufferNombre.toString());
-					System.out.println("Alumno actualizado.");
+					System.out.println("¿Estás seguro de realizar el cambio de nombre?");
+					if (confirmarCambios()) {
+						bufferNombre = new StringBuffer(nombre);
+						bufferNombre.setLength(Constantes.NUMCHARNOMBRE);
+						raf.writeChars(bufferNombre.toString());
+						System.out.println("Alumno actualizado.");
+					}
 				} else {
 					System.out.println("El nombre introducido no es válido.");
 				}
@@ -189,10 +199,13 @@ public class Main {
 				System.out.println("Introduce el nuevo ciclo.");
 				String ciclo = sc.nextLine();
 				if (comprobarNomApellCiclo(ciclo)) {
-					bufferCiclo = new StringBuffer(ciclo);
-					bufferCiclo.setLength(Constantes.NUMCHARCICLO);
-					raf.writeChars(bufferCiclo.toString());
-					System.out.println("Alumno actualizado.");
+					System.out.println("¿Estás seguro de realizar el cambio de ciclo?");
+					if (confirmarCambios()) {
+						bufferCiclo = new StringBuffer(ciclo);
+						bufferCiclo.setLength(Constantes.NUMCHARCICLO);
+						raf.writeChars(bufferCiclo.toString());
+						System.out.println("Alumno actualizado.");
+					}
 				} else {
 					System.out.println("El ciclo introducido no es válido.");
 				}
@@ -205,9 +218,14 @@ public class Main {
 				System.out.println("Introduce el nuevo curso.");
 				curso = sc.nextInt();
 				sc.nextLine();
+		
+				System.out.println("¿Estás seguro de realizar el cambio de curso?");
+				if (confirmarCambios()) {
+					
 
-				raf.writeInt(curso);
-				System.out.println("Alumno actualizado.");
+					raf.writeInt(curso);
+					System.out.println("Alumno actualizado.");
+				}
 
 				posicion = posicionOriginal;
 				break;
@@ -239,7 +257,6 @@ public class Main {
 			}
 			dni = new String(dniChar);
 
-			
 			for (int i = 0; i < apellidosChar.length; i++) {
 				aux = raf.readChar();
 				apellidosChar[i] = aux;
@@ -258,16 +275,16 @@ public class Main {
 			}
 			ciclo = new String(cicloChar);
 			curso = raf.readInt();
-			
+
 			if (dniConsulta.equals(dni)) {
-				
-				System.out.println("Apellidos: "+apellidos);
-				System.out.println("Nombre: "+nombre);
-				System.out.println("DNI: "+dni);
-				System.out.println("Ciclo: "+ciclo);
-				System.out.println("Curso: "+curso);
+
+				System.out.println("Apellidos: " + apellidos);
+				System.out.println("Nombre: " + nombre);
+				System.out.println("DNI: " + dni);
+				System.out.println("Ciclo: " + ciclo);
+				System.out.println("Curso: " + curso);
 				System.out.println("Estas seguro de eliminar este alumno?");
-			
+
 				if (confirmarCambios()) {
 					raf.seek(posicion);
 					buffer = new StringBuffer("0");
@@ -275,7 +292,7 @@ public class Main {
 					raf.writeChars(buffer.toString());
 					System.out.println("Alumno eliminado.");
 				}
-				
+
 				break;
 			}
 
@@ -445,7 +462,7 @@ public class Main {
 
 		System.out.println("Introduce el nombre");
 		nombre = sc.nextLine();
-		
+
 		if (!comprobarNomApellCiclo(nombre)) {
 			System.out.println("Nombre no válido. Solo se aceptan caracteres alfabeticos.");
 			System.out.println("Volviendo al menú principal.");
@@ -458,7 +475,7 @@ public class Main {
 
 		System.out.println("Introduce los apellidos");
 		apellidos = sc.nextLine();
-		
+
 		if (!comprobarNomApellCiclo(apellidos)) {
 			System.out.println("Apellido no válido. Solo se aceptan caracteres alfabeticos.");
 			System.out.println("Volviendo al menú principal.");
@@ -495,15 +512,15 @@ public class Main {
 		bufferCiclo.setLength(Constantes.NUMCHARCICLO);
 
 		System.out.println("Introduce el curso");
-		
+
 		curso = sc.nextInt();
 		sc.nextLine();
 
-		System.out.println("Apellidos: "+apellidos);
-		System.out.println("Nombre: "+nombre);
-		System.out.println("DNI: "+dni);
-		System.out.println("Ciclo: "+ciclo);
-		System.out.println("Curso: "+curso);
+		System.out.println("Apellidos: " + apellidos);
+		System.out.println("Nombre: " + nombre);
+		System.out.println("DNI: " + dni);
+		System.out.println("Ciclo: " + ciclo);
+		System.out.println("Curso: " + curso);
 		System.out.println("Estas seguro de crear este alumno?");
 		if (confirmarCambios()) {
 			raf.writeChars(bufferDni.toString());
@@ -514,15 +531,13 @@ public class Main {
 			System.out.println("Alumno creado.");
 			System.out.println();
 
-		}
-		else {
+		} else {
 			System.out.println("Cancelado creación del alumno.");
 			System.out.println("Volviendo al menú principal.");
 			System.out.println();
 			menuPrincipal();
 		}
-		
-	
+
 	}
 
 	private static boolean comprobarNomApellCiclo(String valor) {
