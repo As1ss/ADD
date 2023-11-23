@@ -237,6 +237,15 @@ public class Main {
 				dniChar[i] = aux;
 			}
 			dni = new String(dniChar);
+			
+			if (dniConsulta.equals(dni)) {
+				raf.seek(posicion);
+				buffer = new StringBuffer("0");
+				buffer.setLength(9);
+				raf.writeChars(buffer.toString());
+				System.out.println("Alumno eliminado.");
+				break;
+			}
 
 			for (int i = 0; i < apellidosChar.length; i++) {
 				aux = raf.readChar();
@@ -257,13 +266,7 @@ public class Main {
 			ciclo = new String(cicloChar);
 			curso = raf.readInt();
 
-			if (dni.equals(dniConsulta)) {
-				buffer = new StringBuffer("0");
-				buffer.setLength(9);
-				raf.writeChars(buffer.toString());
-				System.out.println("Alumno eliminado.");
-				break;
-			}
+			
 
 			posicion += Constantes.TAMAÑOREGISTRO;
 
