@@ -62,7 +62,7 @@ public class Main {
 				break;
 			case "5":
 				System.out.println("Has escogido salir.");
-				break;
+				System.exit(1);
 			default:
 				System.out.println("Escoge una opción válida.");
 				break;
