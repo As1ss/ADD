@@ -27,12 +27,11 @@ public class EjemplorReadObjectWriteObject {
 			File fich = new File("FichPersona.dat");
 			fich.createNewFile();
 		
-			ObjectOutputStream oS = new MiObjectOutputStream(new FileOutputStream(fich,true));
+			ObjectOutputStream oS = new ObjectOutputStream(new FileOutputStream(fich,true));
 			
 			
 			DecimalFormat formato = new DecimalFormat("#.##");
-			float num =12.5334f;
-			System.out.println(formato.format(num));
+			
 
 			try {
 				for (Persona p : personas) {

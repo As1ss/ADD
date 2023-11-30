@@ -18,3 +18,10 @@ además para cada empleado se insertarña un ID > 0 (4bytes) siendo la longitud 
 
 
 PROGRAMAR QUE LEA UN REGISTRO Y LO MUESTRE POR PANTALLA
+
+
+
+
+*********************XML******************************
+
+Con el fichero "FichPersona.dat" crear un fichero XML usando DOM
