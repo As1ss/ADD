@@ -20,7 +20,7 @@ import org.w3c.dom.Element;
 import EjemploObjectInputOutput.*;
 
 
-public class CrearObjetosPersonaXML {
+public class EscribirObjetosPersonaXML {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParserConfigurationException {
 

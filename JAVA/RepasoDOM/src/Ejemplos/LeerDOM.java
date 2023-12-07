@@ -18,7 +18,6 @@ public class LeerDOM {
 
 	public static void main(String[] args) {
 		DocumentBuilderFactory factory;
-		DOMImplementation implementation;
 		DocumentBuilder builder;
 		Document doc;
 		try {

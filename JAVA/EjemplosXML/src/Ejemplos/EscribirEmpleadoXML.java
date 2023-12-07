@@ -18,7 +18,7 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class CrearEmpleadoXML {
+public class EscribirEmpleadoXML {
 	final static int TAMAÑOREGISTRO = 36;
 
 	public static void main(String[] args) throws IOException, ParserConfigurationException {
