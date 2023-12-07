@@ -14,7 +14,7 @@ public class EjemplorReadObjectWriteObject {
 		personas[0] = new Persona("Alicia", 15);
 		personas[1] = new Persona("Ana", 14);
 		personas[2] = new Persona("Luis", 15);
-		personas[3] = new Persona("Alicia", 13);
+		personas[3] = new Persona("Gervasio", 13);
 		personas[4] = new Persona("Pedro", 15);
 		personas[5] = new Persona("Manuel", 16);
 		personas[6] = new Persona("Andrés", 12);
