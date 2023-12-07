@@ -1,77 +1,67 @@
 package Ejemplos;
 
 
-
 import java.io.IOException;
-import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.helpers.XMLReaderFactory;
-
 
 public class LeerSax {
 
 	public static void main(String[] args) {
+		SAXParserFactory saxFactory;
+		SAXParser saxParser;
+		XMLReader xmlReader;
+		SAXHandler handler;
 		try {
-			// Crear objeto procesador de XML
-						SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-						SAXParser parser = parserFactory.newSAXParser();
-						XMLReader procesadorXML = parser.getXMLReader();
-						
-						
-						GestionContenido gestor = new GestionContenido();
-						procesadorXML.setContentHandler(gestor);
-						
-						// Definir el fichero XML a leer
-						InputSource fileXML = new InputSource("D://Empleados.xml");
-						
-						// Procesar el documento XML
-						procesadorXML.parse(fileXML);  
-
+			saxFactory = SAXParserFactory.newInstance();
+			saxParser = saxFactory.newSAXParser();
+			xmlReader = saxParser.getXMLReader();
+			handler = new SAXHandler();
+			xmlReader.setContentHandler(handler);
+			xmlReader.parse(new InputSource("D://Empleados.xml"));
+			
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			e.printStackTrace();
 		}
 		
-		catch (SAXException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}
-	}
-} // Fin PruebaSax1
 
-class GestionContenido extends DefaultHandler {
-	public GestionContenido() {
-		super();
 	}
+	
+	
+}
+ class SAXHandler extends DefaultHandler{
 
-	public void startDocument() {
-		System.out.println("Comienzo del Documento XML");
+	@Override
+	public void startDocument() throws SAXException {
+	System.out.println("Inicio del documento");
 	}
-
-	public void startElement(String uri, String nombre, String nombreC, Attributes atts) {
-		System.out.printf("\t Principio del Elemento: %s %n", nombreC);
+	
+	@Override
+	public void startElement(String uri, String localName, String qName, Attributes attributes)
+			throws SAXException {
+		System.out.print("<"+qName+">");
 	}
-
-	public void characters(char[] ch, int inicio, int longitud) throws SAXException {
-		String car = new String(ch, inicio, longitud);
-		// Quitar saltos de línea
-		car = car.replaceAll("[\t\n]", "");
-		System.out.printf("\t Caracteres: %s %n", car);
+	@Override
+	public void characters(char[] ch, int start, int length) throws SAXException {
+		String valor = new String(ch,start,length);
+		System.out.print(valor);
 	}
-
-	public void endElement(String uri, String nombre, String nombreC) {
-		System.out.printf("\t Fin del Elemento: %s %n", nombreC);
+	@Override
+	public void endElement(String uri, String localName, String qName) throws SAXException {
+		System.out.print("</"+qName+">");
 	}
-
-	public void endDocument() {
-		System.out.println("Final del Documento XML");
+	@Override
+	public void endDocument() throws SAXException {
+		System.out.println("Fin del documento");
 	}
+	
 }
