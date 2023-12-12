@@ -32,27 +32,25 @@ public class EscribirObjXStream {
 				}
 
 			} catch (EOFException e) {
-
+				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
-			}
-			finally {
+			} finally {
 				ois.close();
 			}
-		
-			xStream.alias("Personas", List.class);//Elemento raiz
-			xStream.alias("Persona",Persona.class ); //Elemento persona
-		
-			xStream.aliasField("Nombre",Persona.class, "nombre"); //Renombrar etiqueta de nombre a Nombre
-			xStream.aliasField("Edad",Persona.class, "edad"); //Renombrar etiqueta de edad a Edad
-			xStream.toXML(personas, new FileOutputStream("D://Personas.xml")); //Escribir la data a un document XML
+
+			xStream.alias("Personas", List.class);// Elemento raiz
+			xStream.alias("Persona", Persona.class); // Elemento persona
+
+			xStream.aliasField("Nombre", Persona.class, "nombre"); // Renombrar etiqueta de nombre a Nombre
+			xStream.aliasField("Edad", Persona.class, "edad"); // Renombrar etiqueta de edad a Edad
+			xStream.toXML(personas, new FileOutputStream("D://Personas.xml")); // Escribir la data a un document XML
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 
 	}
 

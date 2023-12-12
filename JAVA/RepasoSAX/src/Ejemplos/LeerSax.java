@@ -27,12 +27,12 @@ public class LeerSax {
 			xmlReader.parse(new InputSource("D://Empleados.xml"));
 			
 		} catch (ParserConfigurationException | SAXException | IOException e) {
+			if(e instanceof ParserConfigurationException ){
+				e.printStackTrace();
+			}
 			e.printStackTrace();
 		}
-		
-
 	}
-	
 	
 }
  class SAXHandler extends DefaultHandler{

@@ -29,19 +29,19 @@ public class EscribirEmpleadoXML {
 		char aux;
 		String apellido;
 		double salario;
-		
+
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();	
+		DocumentBuilder builder = factory.newDocumentBuilder();
 		DOMImplementation implementation = builder.getDOMImplementation();
 		Document doc = implementation.createDocument(null, "Empleados", null);
 		doc.setXmlVersion("1.0");
-	
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
 		posicion = 0;
 		while (true) {
 			raf.seek(posicion);
@@ -54,40 +54,40 @@ public class EscribirEmpleadoXML {
 			apellido = new String(apellidos);
 			dpto = raf.readInt();
 			salario = raf.readDouble();
-			
-			
-			
+
+
+
 			Element empleadoNodo = doc.createElement("Empleado");
 			doc.getDocumentElement().appendChild(empleadoNodo);
-            
+
             Element idNodo = doc.createElement("ID");
             idNodo.appendChild(doc.createTextNode(String.valueOf(id).trim()));
             empleadoNodo.appendChild(idNodo);
-            
+
             Element apellidoNodo = doc.createElement("Apellidos");
             apellidoNodo.appendChild(doc.createTextNode(apellido.trim()));
             empleadoNodo.appendChild(apellidoNodo);
-            
+
             Element dptoNodo = doc.createElement("Departamento");
             dptoNodo.appendChild(doc.createTextNode(String.valueOf(dpto).trim()));
             empleadoNodo.appendChild(dptoNodo);
-            
+
             Element salarioNodo = doc.createElement("Salario");
             salarioNodo.appendChild(doc.createTextNode(String.valueOf(salario).trim()));
             empleadoNodo.appendChild(salarioNodo);
-            
-            
-            
-			
+
+
+
+
 			if (id>0) {
 				System.out.println("ID: "+id);
 				System.out.println("Apellidos: "+apellido);
 				System.out.println("Departamento; "+dpto);
 				System.out.println("Salario: "+salario);
 			}
-			
-			
-			
+
+
+
 			posicion += TAMAÑOREGISTRO;
 
 			if (raf.getFilePointer() == fichero.length()) {
@@ -96,25 +96,25 @@ public class EscribirEmpleadoXML {
 			}
 
 		}
-	
-		
-		
+
+
+
 		try {
 			Source source = new DOMSource(doc);
 			Result result = new StreamResult((new File ("D:\\Empleados.xml")));
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			
+
 			transformer.transform(source, result);
-			
-		
-			
+
+
+
 		} catch (Exception e) {
-		
+
 		}
-		
-		
+
+
 
 		raf.close();
 	}
