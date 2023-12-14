@@ -8,7 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 // Esto significa que la clases "Libreria.java" es el elemento raiz
 // @XmlRootElement(namespace = "ejemplo.xml")
 // @XmlRootElement(namespace = "")
-@XmlRootElement()
+
+
 
 public class Libreria {
 	 
