@@ -25,3 +25,28 @@ PROGRAMAR QUE LEA UN REGISTRO Y LO MUESTRE POR PANTALLA
 *********************XML******************************
 
 Con el fichero "FichPersona.dat" crear un fichero XML usando DOM
+
+
+
+***********JAXB/*/*/*/**/*//**/*********
+
+Basados en el ejemplo 1, realizar cambios para generar un documento XML que agrupe varias librerias (2) y con varios libros cada una de ellas, debera generar un documento de nombre "Librerias.xml"
+
+<Mis Librerias>
+	<Libreria>
+		<Nombre>...</Nombre>
+		<Lugar>...</Lugar>
+		<Libro>
+			<Nombre>
+			<Autor>
+		</Libro>
+		<Libro/>
+	</Libreria>
+	<Libreria>
+		<Nombre/>
+		<Lugar/>
+		<Libro/>
+		<Libro/>
+		<Libro/>
+	</Libreria>
+</Mis Librerias>
