@@ -1,4 +1,4 @@
-package Ejemplos;
+package Ejercicio;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -9,16 +9,16 @@ public class Libro {
 	private String autor;
 	private String editorial;
 	private String isbn;
-
+	
 	public Libro() {
-
+	
 	}
-
-	public Libro(String titulo, String autor, String editorial, String isbn) {
-		this.titulo = titulo;
-		this.autor = autor;
-		this.editorial = editorial;
-		this.isbn = isbn;
+	
+	public Libro(String titulo, String autor, String editorial,String isbn) {
+		this.titulo=titulo;
+		this.autor=autor;
+		this.editorial=editorial;
+		this.isbn=isbn;
 	}
 
 	@XmlElement(name="Titulo")
@@ -56,7 +56,6 @@ public class Libro {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	
 	
 
 }
