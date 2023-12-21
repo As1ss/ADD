@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ventasarticulos>
     <articulo>
@@ -45,3 +46,64 @@
         </venta>
     </ventas>
 </ventasarticulos>
+=======
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ventasarticulos>
+    <articulo>
+        <codigo>ART-112</codigo>
+        <denominacion>Pala Padel NOX</denominacion>
+        <stock>20</stock>
+        <precio>70</precio>
+    </articulo>
+    <ventas>
+        <venta>
+            <numventa>10</numventa>
+            <unidades>33</unidades>
+            <nombrecliente>Alicia Ramos</nombrecliente>
+            <fecha>13/12/2007</fecha>
+        </venta>
+        <venta>
+            <numventa>11</numventa>
+            <unidades>2</unidades>
+            <nombrecliente>Pedro García</nombrecliente>
+            <fecha>15-10-2023</fecha>
+        </venta>
+        <venta>
+            <numventa>30</numventa>
+            <unidades>23</unidades>
+            <nombrecliente>Pepe</nombrecliente>
+            <fecha>29123</fecha>
+        </venta>
+        <venta>
+            <numventa>98</numventa>
+            <unidades>98</unidades>
+            <nombrecliente>Juan garcía</nombrecliente>
+            <fecha>05/09/2020</fecha>
+        </venta>
+        <venta>
+            <numventa>13</numventa>
+            <unidades>24</unidades>
+            <nombrecliente>Josefa Valdomero</nombrecliente>
+            <fecha>19/12/2012</fecha>
+        </venta>
+        <venta>
+            <numventa>28</numventa>
+            <unidades>39</unidades>
+            <nombrecliente>German Palomares</nombrecliente>
+            <fecha>05/08/2020</fecha>
+        </venta>
+        <venta>
+            <numventa>122</numventa>
+            <unidades>985</unidades>
+            <nombrecliente>Pablo Perez</nombrecliente>
+            <fecha>01/01/2001</fecha>
+        </venta>
+        <venta>
+            <numventa>10</numventa>
+            <unidades>33</unidades>
+            <nombrecliente>Alicia Ramos</nombrecliente>
+            <fecha>13/12/2007</fecha>
+        </venta>
+    </ventas>
+</ventasarticulos>
+>>>>>>> af5ef180b4b6a397525f716a337e16226e33438d
