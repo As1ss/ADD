@@ -50,3 +50,21 @@ Basados en el ejemplo 1, realizar cambios para generar un documento XML que agru
 		<Libro/>
 	</Libreria>
 </Mis Librerias>
+
+--------------------------------------------------------------------------------
+
+EJERCICIOS CONEXIONES A BASE DE DATOS MYSQL
+
+--------------------------------------------------------------------------------
+
+
+
+1.- OBTENER AEPLLIDO, OFICIO, SALARIO DE TODOS LOS EMPLEADOS DEL DEPARTAMENTO 10
+
+2.- OBTENER APELLIDO Y SALARIO Y EL NOMBRE DEL DEPARTAMENTO DEL EMPLEADO QUE MAS COBRE DE LA EMPRESA
+
+
+
+
+
+
