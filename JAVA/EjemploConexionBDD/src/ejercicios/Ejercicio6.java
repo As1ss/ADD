@@ -111,14 +111,14 @@ public class Ejercicio6 {
 			Statement sentencia = conexion.createStatement();
 			String query = "SELECT * FROM EMPLEADO";
 			ResultSet resultado = sentencia.executeQuery(query);
+			int numColumns = resultado.get
 
 			while (resultado.next()) {
-				int Emp_no = resultado.getInt(1);
+				int[] Emp_no = resultado.getInt(1);
+
+				int[] director = resultado.getInt(4);
 				
-				
-				int director = resultado.getInt(4);
-				
-				int dept_no = resultado.getInt(7);
+				int[] dept_no = resultado.getInt(7);
 			}
 
 		} catch (ClassNotFoundException e) {
