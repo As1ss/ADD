@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `add_ejemplo`.`empleado` (
   `apellido` VARCHAR(10) NULL DEFAULT NULL,
   `oficio` VARCHAR(10) NOT NULL,
   `director` SMALLINT NOT NULL,
-  `fecha_alta` DATE NULL DEFAULT curdate(),
+  `fecha_alta` DATE NULL,
   `salario` FLOAT(6,2) NOT NULL,
   `comision` FLOAT(6,2) NULL DEFAULT '0.00',
   `dept_no` TINYINT NOT NULL,
