@@ -36,9 +36,32 @@ public class OperacionesDepartamento implements CrudInterface {
 			Conexion.cerrarConexion();
 		}
 	}
+	@Override
+	public Departamento read(int id) {
+		conn = Conexion.abrirConexion();
+		String query = "SELECT * FROM DEPARTAMENTO WHERE dept_no = "+id;
+		Departamento dep = new Departamento();
+		try {
+			Statement sentencia = (Statement) conn.createStatement();
+			ResultSet rs = sentencia.executeQuery("SELECT * FROM DEPARTAMENTO");
+			while (rs.next()) {
+				
+				dep.setDept_no(rs.getInt(1));
+				dep.setDnombre(rs.getString(2));
+				dep.setLoc(rs.getString(3));
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			Conexion.cerrarConexion();
+		}
+		return dep;
+	}
 
 	@Override
-	public List<Departamento> read() {
+	public List<Departamento> readAll() {
 		conn = Conexion.abrirConexion();
 		String query = "SELECT * FROM DEPARTAMENTO";
 		List<Departamento> departamentos = new ArrayList<Departamento>();

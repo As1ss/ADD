@@ -28,6 +28,7 @@ public Ejercicio9() {
 		consultarDepartamentos();
 		
 		dept.setLoc("BILBAO");
+		
 		actualizarDepartamento(dept);
 		
 		consultarDepartamentos();
