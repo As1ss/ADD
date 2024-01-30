@@ -1,9 +1,10 @@
 package ejercicio;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-@Table(name = "departamento")
+
+@Entity(name = "departamento")
 public class Departamento {
 
 	@Id

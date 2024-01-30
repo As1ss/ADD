@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         // Crea la fábrica de EntityManager usando la unidad de persistencia definida en persistence.xml
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("miUnidadPersistencia");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("m");
 
         // Crea un EntityManager
         EntityManager em = emf.createEntityManager();
@@ -20,13 +20,15 @@ public class Main {
         try {
             // Inicia la transacción
             transaction.begin();
+        
 
             // Crea una entidad y pérsistela
-            Departamento departamento = new Departamento();
-            departamento.setDept_no(70);
-            departamento.setDnombre("PRUEBAS");
-            departamento.setLoc("LEON");
-            em.persist(departamento);
+            Departamento departamento =  em.find(Departamento.class, 70);
+         
+            departamento.setDnombre("TEST");
+          
+           // em.persist(departamento);
+            
 
             // Confirma la transacción
             transaction.commit();
