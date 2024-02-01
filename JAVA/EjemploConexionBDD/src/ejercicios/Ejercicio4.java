@@ -21,7 +21,7 @@ public class Ejercicio4 {
 			ResultSet resultadoPKDept = dbmd.getPrimaryKeys(null, null, "departamento");
 			ResultSet resultadoFKDept = dbmd.getExportedKeys(null, null, "departamento");
 			ResultSet resultadoPKEmpl = dbmd.getPrimaryKeys(null, null, "empleado");
-			ResultSet resultadoFKEmpl = dbmd.getImportedKeys(null, null, "empleado");
+			ResultSet resultadoFKEmpl = dbmd.getExportedKeys(null, null, "empleado");
 			
 			
 				System.out.println("PRIMARY KEY DEPARTAMENTO");
