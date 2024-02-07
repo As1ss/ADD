@@ -1,5 +1,8 @@
 package ejercicio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -14,20 +17,24 @@ public class Ejercicio1 {
 
 		eTrans.begin();
 
-		Persona p1 = eManager.find(Persona.class, 1);
-		
-		
-		
+		Persona p1 = new Persona();
+		List<SuperHeroe> miembros = new ArrayList<SuperHeroe>();
+		p1.setName("Alexis");
 		SuperHeroe sh1 = new SuperHeroe();
-		sh1.setName("Spoiderman");
+		sh1.setName("Campeón de las Telas");
 		sh1.setPersona(p1);
+	
+		miembros.add(sh1);
 		
-
+		Equipo equipo = new Equipo();
+		equipo.setName("Liga de los Tolays");
+		equipo.setMiembros(miembros);
+		sh1.setTeam(equipo);
 		eManager.persist(sh1);
+		
+		
 
 		eTrans.commit();
-		
-		
 
 	}
 
