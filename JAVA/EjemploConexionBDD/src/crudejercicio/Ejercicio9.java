@@ -56,16 +56,16 @@ public Ejercicio9() {
 
 		OperacionesDepartamento depService = new OperacionesDepartamento();
 		
-		departamentos = (ArrayList<Departamento>) depService.read();
-		
-
-
-		for(Departamento dep : departamentos) {
-			System.out.println("Departamento: "+dep.getDept_no());
-			System.out.println("Nombre del departamento: "+dep.getDnombre());
-			System.out.println("Localización del departamento: "+dep.getLoc());
-			System.out.println("----------------------------------------------");
-		}
+//		departamentos = (ArrayList<Departamento>) depService.read();
+//		
+//
+//
+//		for(Departamento dep : departamentos) {
+//			System.out.println("Departamento: "+dep.getDept_no());
+//			System.out.println("Nombre del departamento: "+dep.getDnombre());
+//			System.out.println("Localización del departamento: "+dep.getLoc());
+//			System.out.println("----------------------------------------------");
+//		}
 		
 	}
 	private static void insertarDepartamento(Departamento dept) {
