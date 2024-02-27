@@ -2,14 +2,17 @@ package ejercicio;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.bson.Document;
 
-import com.mongodb.client.FindIterable;
+import com.mongodb.MongoNamespace;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+
 
 public class MongoMain {
 
@@ -17,21 +20,41 @@ public class MongoMain {
 		URI uri = new URI("mongodb://localhost:2701");
 
 		MongoClient mongoClient = MongoClients.create();
-
-		for (String dbName : mongoClient.listDatabaseNames()) {
-			System.out.println(dbName);
-		}
+		MongoDatabase dbAdmin = mongoClient.getDatabase("admin");
+		
+	
+		
+		
 		MongoDatabase dbMonguer = mongoClient.getDatabase("hola");
-		MongoCollection<Document> collectionMonguers = dbMonguer.getCollection("Pedrito");
+		MongoCollection<Document> collectionEmpleados = dbMonguer.getCollection("Empleados");
+		
 
-		for (Document documentos : dbMonguer.listCollections()) {
-			System.out.println(documentos.toJson());
 
-		}
+		mongoClient.close();
+	}
+	
+	
+	
+	public void recorrerElementos(MongoClient mongoClient,MongoDatabase dbMonguer,MongoCollection<Document> collectionEmpleados) {
+		
+		  for (String dbName : mongoClient.listDatabaseNames()) {
+		  System.out.println(dbName); }
+		  
+		 for (Document documentos : dbMonguer.listCollections()) {
+		  System.out.println(documentos.toJson());
+		  
+		  }
+		  
+		  for (Document name : collectionEmpleados.find()) {
+		  System.out.println(name.toJson()); }
+		 
+	}
 
-		for (Document name : collectionMonguers.find()) {
-			System.out.println(name.toJson());
-		}
+	public void renombrarDocumento(MongoDatabase dbMonguer) {
+		MongoNamespace oldName = new MongoNamespace(dbMonguer.getName(), "Pedrito");
+		MongoNamespace newName = new MongoNamespace(dbMonguer.getName(), "Empleados");
+
+		dbMonguer.getCollection("Pedrito").renameCollection(newName);
 
 	}
 
